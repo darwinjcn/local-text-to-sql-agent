@@ -1,0 +1,22 @@
+# Entorno virtual
+venv/
+env/
+ENV/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Variables de entorno (NUNCA subir API keys)
+.env
+
+# Archivos de base de datos locales (muy pesados)
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos temporales
+*.log
+.DS_Store
+Thumbs.db
