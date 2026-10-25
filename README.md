@@ -1,8 +1,8 @@
 # 🤖 Mi Primer Agente de IA
 
-Proyecto educativo y profesional para construir agentes de IA autónomos usando herramientas **100% gratuitas, locales y open-source**.
+Proyecto profesional para construir agentes de IA autónomos usando herramientas **100% gratuitas, locales y open-source**.
 
-![Python](https://img.shields.io/badge/Python-3.x-blue) ![CrewAI](https://img.shields.io/badge/Framework-CrewAI-orange) ![Ollama](https://img.shields.io/badge/LLM-Ollama-green) ![Licencia](https://img.shields.io/badge/Tipo-Educativo-informational)
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat&logo=python&logoColor=white) ![CrewAI](https://img.shields.io/badge/CrewAI-multi--agent-E4641F?style=flat) ![Ollama](https://img.shields.io/badge/Ollama-LLM_local-black?style=flat&logo=ollama&logoColor=white) ![Qwen 2.5](https://img.shields.io/badge/Qwen_2.5-7B-615CED?style=flat) ![Pandas](https://img.shields.io/badge/Pandas-an%C3%A1lisis_de_datos-150458?style=flat&logo=pandas&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-base_de_datos-003B57?style=flat&logo=sqlite&logoColor=white) ![100%25 Local](https://img.shields.io/badge/100%25-local__privado-2EA44F?style=flat) ![Licencia](https://img.shields.io/badge/Licencia-MIT-green?style=flat)
 
 ---
 
