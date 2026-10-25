@@ -29,6 +29,8 @@ flowchart LR
 
 ## 📷 Demo
 
+Salida de la ejecución del agente Text-to-SQL (`python agente_sql.py`):
+
 ![Agente Text-to-SQL en acción](assets/demo_sql.png)
 
 ## 🛠️ Stack Tecnológico
