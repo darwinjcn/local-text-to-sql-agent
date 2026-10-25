@@ -2,7 +2,7 @@
 
 Proyecto profesional para construir agentes de IA autónomos usando herramientas **100% gratuitas, locales y open-source**.
 
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat&logo=python&logoColor=white) ![CrewAI](https://img.shields.io/badge/CrewAI-multi--agent-E4641F?style=flat) ![Ollama](https://img.shields.io/badge/Ollama-LLM_local-black?style=flat&logo=ollama&logoColor=white) ![Qwen 2.5](https://img.shields.io/badge/Qwen_2.5-7B-615CED?style=flat) ![Pandas](https://img.shields.io/badge/Pandas-an%C3%A1lisis_de_datos-150458?style=flat&logo=pandas&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-base_de_datos-003B57?style=flat&logo=sqlite&logoColor=white) ![100%25 Local](https://img.shields.io/badge/100%25-local__privado-2EA44F?style=flat) ![Licencia](https://img.shields.io/badge/Licencia-MIT-green?style=flat)
+Python CrewAI Ollama Qwen 2.5 Pandas SQLite 100%25 Local Licencia
 
 ---
 
@@ -13,15 +13,35 @@ Proyecto profesional para construir agentes de IA autónomos usando herramientas
 - Conectar agentes con datos reales (archivos CSV y bases de datos SQL).
 - Aplicar el **Patrón Híbrido**: Python para cálculos deterministas, LLM para redacción y razonamiento.
 
+## 🧠 Arquitectura del Agente
+
+```mermaid
+flowchart LR
+    U(["👤 Usuario"]) -->|"Pregunta en lenguaje natural"| A["🤖 Agente CrewAI"]
+    A -->|"Genera SQL"| T["🔧 Herramienta SQL"]
+    T --> BD[("🗄️ SQLite")]
+    BD -->|"Resultados exactos"| A
+    A -->|"Contexto + datos"| L["🧠 Qwen 2.5 7B (Ollama)"]
+    L -->|"Respuesta redactada"| U
+```
+
+> El agente nunca inventa datos: el cálculo lo hace SQLite/Pandas y el LLM solo interpreta y redacta.
+
+## 📷 Demo
+
+![Agente Text-to-SQL en acción](assets/demo_sql.png)
+
 ## 🛠️ Stack Tecnológico
 
-| Tecnología | Rol en el proyecto |
-|---|---|
-| **Python 3.x** | Lenguaje principal del proyecto |
-| **CrewAI** | Framework de orquestación de agentes |
-| **Ollama + Qwen 2.5 (7B)** | Motor de inferencia local y privado |
-| **Pandas** | Manipulación y análisis de datos |
-| **SQLite** | Base de datos relacional local |
+
+| Tecnología                 | Rol en el proyecto                   |
+| -------------------------- | ------------------------------------ |
+| **Python 3.x**             | Lenguaje principal del proyecto      |
+| **CrewAI**                 | Framework de orquestación de agentes |
+| **Ollama + Qwen 2.5 (7B)** | Motor de inferencia local y privado  |
+| **Pandas**                 | Manipulación y análisis de datos     |
+| **SQLite**                 | Base de datos relacional local       |
+
 
 ## 📂 Estructura del Proyecto
 
@@ -78,7 +98,7 @@ python agente_sql.py
 
 ## 💡 Aprendizajes Clave
 
-1. **Limitaciones del Tool Calling:** los modelos pequeños (<7B) tienden a alucinar al intentar generar código SQL o llamar a funciones complejas.
+1. **Limitaciones del Tool Calling:** los modelos pequeños (&lt;7B) tienden a alucinar al intentar generar código SQL o llamar a funciones complejas.
 2. **Arquitectura Híbrida:** delegar el cálculo a Python (Pandas/SQL) y la redacción al LLM garantiza cero alucinaciones y 100% de precisión en los datos.
 3. **Privacidad total:** al ejecutar el LLM localmente con Ollama, ningún dato sale de tu máquina.
 4. **Modularidad:** separar la conexión (`test_conexion.py`), las herramientas (`@tool`) y los agentes hace el proyecto fácil de extender.
