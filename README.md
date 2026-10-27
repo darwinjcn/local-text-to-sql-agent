@@ -2,7 +2,10 @@
 
 Proyecto profesional para construir agentes de IA autónomos usando herramientas **100% gratuitas, locales y open-source**.
 
-Python CrewAI Ollama Qwen 2.5 Pandas SQLite 100%25 Local Licencia
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![CrewAI](https://img.shields.io/badge/CrewAI-Agents-orange?logo=python)
+![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-black?logo=linux)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
@@ -70,7 +73,7 @@ ollama pull qwen2.5:7b
 ### 2. Instalación del entorno
 
 ```bash
-pip install crewai pandas
+pip install crewai crewai-tools langchain-community pandas tabulate
 ```
 
 ### 3. Verificar la conexión con el LLM local
@@ -107,6 +110,8 @@ python agente_sql.py
 
 ---
 
-## 🎉 ¡Y listo!
+## 🔮 Próximos Pasos (Roadmap)
 
-Acabas de construir, probar y desplegar en tu portafolio un **Agente de IA Text-to-SQL funcional**. Puedes cambiar la variable `pregunta_usuario` en `agente_sql.py` por cualquier otra cosa (ej: *"¿Cuál es el promedio de precio por categoría?"*) y el agente lo resolverá por sí mismo.
+- [ ] Integrar interfaz web con Streamlit para usuarios no técnicos.
+- [ ] Conectar el agente a una base de datos PostgreSQL en la nube.
+- [ ] Implementar un sistema Multi-Agente (Data Engineer + Business Analyst).
