@@ -1,4 +1,4 @@
-# 🤖 Mi Primer Agente de IA
+# 🤖 Local Text-to-SQL Agent
 
 Proyecto profesional para construir agentes de IA autónomos usando herramientas **100% gratuitas, locales y open-source**.
 
@@ -51,7 +51,7 @@ Salida de la ejecución del agente Text-to-SQL (`python agente_sql.py`):
 ## 📂 Estructura del Proyecto
 
 ```text
-mi-primer-agente/
+local-text-to-sql-agent/
 ├── test_conexion.py              # Prueba de conexión con el LLM local
 ├── agente_herramienta_custom.py  # Creación de herramientas personalizadas (@tool)
 ├── agente_csv_hibrido.py         # Patrón híbrido: Pandas calcula, LLM redacta
