@@ -1,0 +1,6 @@
+crewai
+crewai-tools
+langchain-community
+pandas
+tabulate
+streamlit
