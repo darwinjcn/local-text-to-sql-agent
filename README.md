@@ -5,6 +5,7 @@ Proyecto profesional para construir agentes de IA autónomos usando herramientas
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![CrewAI](https://img.shields.io/badge/CrewAI-Agents-orange?logo=python)
 ![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-black?logo=linux)
+![Streamlit](https://img.shields.io/badge/Streamlit-web_app-FF4B4B?logo=streamlit&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
@@ -56,6 +57,7 @@ local-text-to-sql-agent/
 ├── agente_herramienta_custom.py  # Creación de herramientas personalizadas (@tool)
 ├── agente_csv_hibrido.py         # Patrón híbrido: Pandas calcula, LLM redacta
 ├── agente_sql.py                 # Agente Text-to-SQL autónomo
+├── app.py                        # Interfaz web con Streamlit
 ├── crear_bd.py                   # Script para generar la BD SQLite de prueba
 └── ventas.csv                    # Dataset de ejemplo
 ```
@@ -73,7 +75,7 @@ ollama pull qwen2.5:7b
 ### 2. Instalación del entorno
 
 ```bash
-pip install crewai crewai-tools langchain-community pandas tabulate
+pip install crewai crewai-tools langchain-community pandas tabulate streamlit
 ```
 
 ### 3. Verificar la conexión con el LLM local
@@ -101,6 +103,14 @@ python agente_csv_hibrido.py
 python agente_sql.py
 ```
 
+### 6. Ejecutar la Interfaz Web (Streamlit)
+
+```bash
+streamlit run app.py
+```
+
+Esto abrirá en tu navegador una aplicación web local (`http://localhost:8501`) donde podrás interactuar visualmente con el agente: escribe tu pregunta en lenguaje natural y obtén la respuesta sin usar la terminal.
+
 ## 💡 Aprendizajes Clave
 
 1. **Limitaciones del Tool Calling:** los modelos pequeños (&lt;7B) tienden a alucinar al intentar generar código SQL o llamar a funciones complejas.
@@ -112,6 +122,6 @@ python agente_sql.py
 
 ## 🔮 Próximos Pasos (Roadmap)
 
-- [ ] Integrar interfaz web con Streamlit para usuarios no técnicos.
+- [x] Integrar interfaz web con Streamlit para usuarios no técnicos.
 - [ ] Conectar el agente a una base de datos PostgreSQL en la nube.
 - [ ] Implementar un sistema Multi-Agente (Data Engineer + Business Analyst).
