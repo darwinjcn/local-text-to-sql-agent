@@ -1,16 +1,31 @@
 # app.py
 import streamlit as st
 import sqlite3
+import time
 from crewai import Agent, Task, Crew, Process, LLM
 from crewai.tools import tool
 
 # 1. Configuración de la página
 st.set_page_config(page_title="Local Text-to-SQL Agent", page_icon="🤖", layout="wide")
 
+# 2. Barra Lateral (Sidebar) para información del proyecto
+with st.sidebar:
+    st.title("🤖 Agent Info")
+    st.markdown("### 🛠️ Stack Tecnológico")
+    st.markdown("- **CrewAI**: Orquestación de agentes")
+    st.markdown("- **Ollama + Qwen 2.5 (7B)**: LLM Local")
+    st.markdown("- **SQLite**: Base de datos relacional")
+    st.markdown("- **Streamlit**: Interfaz Web")
+    st.divider()
+    st.markdown("### 📂 Base de Datos")
+    st.info("Contiene ventas de Enero a Marzo de 2026.")
+    st.caption("Desarrollado por Darwin Colmenares | 2026")
+
+# 3. Título y descripción principal
 st.title("🤖 Local Text-to-SQL Agent")
 st.markdown("Haz una pregunta en lenguaje natural sobre las ventas y el agente consultará la base de datos SQLite en tiempo real, **sin alucinaciones**.")
 
-# 2. Cargar el Agente en caché
+# 4. Cargar el Agente en caché
 @st.cache_resource
 def cargar_agente():
     local_llm = LLM(
@@ -48,10 +63,7 @@ def cargar_agente():
             "Eres un experto en SQL y análisis de datos. "
             "NUNCA inventas números ni asumes datos que no existen. "
             "SIEMPRE ejecutas tu herramienta 'Ejecutor de Consultas SQL' antes de responder. "
-            "La base de datos contiene ventas del período ENERO A MARZO DE 2026.\n\n"
-            "EJEMPLOS DE CONSULTAS CORRECTAS:\n"
-            "- Pregunta: '¿Qué producto vendió más en marzo?' → SQL: SELECT producto, SUM(unidades) FROM ventas WHERE fecha BETWEEN '2026-03-01' AND '2026-03-31' GROUP BY producto ORDER BY SUM(unidades) DESC LIMIT 1\n"
-            "- Pregunta: '¿Cuánto se vendió por categoría?' → SQL: SELECT categoria, SUM(total) FROM ventas GROUP BY categoria\n\n"
+            "La base de datos contiene ventas del período ENERO A MARZO DE 2026. "
             "Cuando generes un SELECT, SIEMPRE incluye las columnas numéricas relevantes "
             "(unidades, total) junto con las de agrupación (producto, categoria) para mostrar tablas completas."
         ),
@@ -83,10 +95,9 @@ def cargar_agente():
 
     return Crew(agents=[analista], tasks=[tarea], process=Process.sequential)
 
-# 3. Interfaz de Usuario
+# 5. Interfaz de Usuario (Formulario)
 st.info("💡 **Prueba con:** '¿Cuál fue el producto que más ingresos generó en marzo de 2026?' o '¿Cuánto se vendió en total por categoría?'")
 
-# Formulario para que Enter funcione
 with st.form("formulario_pregunta", clear_on_submit=True):
     pregunta_usuario = st.text_input(
         "Escribe tu pregunta aquí:", 
@@ -94,21 +105,34 @@ with st.form("formulario_pregunta", clear_on_submit=True):
         label_visibility="collapsed"
     )
     
-    # Botón con ancho normal
     enviado = st.form_submit_button("🚀 Analizar Datos", type="primary")
 
     if enviado:
         if not pregunta_usuario.strip():
             st.warning("⚠️ Por favor, escribe una pregunta primero.")
         else:
-            with st.spinner(" El agente está pensando y consultando la base de datos..."):
+            with st.spinner("🧠 El agente está pensando y consultando la base de datos..."):
                 try:
+                    # Medir el tiempo de ejecución
+                    start_time = time.time()
                     crew = cargar_agente()
                     resultado = crew.kickoff(inputs={"pregunta": pregunta_usuario})
+                    end_time = time.time()
+                    tiempo_ejecucion = round(end_time - start_time, 2)
                     
                     st.success("✅ ¡Análisis completado!")
                     st.markdown("---")
-                    st.markdown(resultado.raw)
+                    
+                    # Layout de dos columnas para el resultado
+                    col1, col2 = st.columns([3, 1])
+                    
+                    with col1:
+                        st.markdown(resultado.raw)
+                        
+                    with col2:
+                        st.metric(label="⏱️ Tiempo de respuesta", value=f"{tiempo_ejecucion} s")
+                        st.metric(label="📊 Estado", value="Exitoso")
+                        st.caption("Modelo: Qwen 2.5 7B (Local)")
                     
                 except Exception as e:
                     st.error(f"❌ Ocurrió un error: {str(e)}")

@@ -33,9 +33,15 @@ flowchart LR
 
 ## 📷 Demo
 
-Salida de la ejecución del agente Text-to-SQL (`python agente_sql.py`):
+**Agente en la terminal** (`python agente_sql.py`):
 
-![Agente Text-to-SQL en acción](assets/demo_sql.png)
+![Agente Text-to-SQL en la terminal](assets/demo_sql_terminal.png)
+
+**Interfaz web con Streamlit** (`streamlit run app.py`):
+
+![Interfaz web del agente: menú lateral con los componentes y preguntas de ejemplo](assets/app_streamlit_web.png)
+
+![Respuesta del agente: SQL generado y tabla de resultados](assets/resultado_app_streamlit.png)
 
 ## 🛠️ Stack Tecnológico
 
@@ -47,6 +53,7 @@ Salida de la ejecución del agente Text-to-SQL (`python agente_sql.py`):
 | **Ollama + Qwen 2.5 (7B)** | Motor de inferencia local y privado  |
 | **Pandas**                 | Manipulación y análisis de datos     |
 | **SQLite**                 | Base de datos relacional local       |
+| **Streamlit**               | Interfaz web del agente             |
 
 
 ## 📂 Estructura del Proyecto
@@ -59,6 +66,8 @@ local-text-to-sql-agent/
 ├── agente_sql.py                 # Agente Text-to-SQL autónomo
 ├── app.py                        # Interfaz web con Streamlit
 ├── crear_bd.py                   # Script para generar la BD SQLite de prueba
+├── requirements.txt              # Dependencias del proyecto
+├── assets/                       # Capturas de demostración
 └── ventas.csv                    # Dataset de ejemplo
 ```
 
@@ -72,25 +81,37 @@ Tener [Ollama](https://ollama.com) instalado y descargar el modelo:
 ollama pull qwen2.5:7b
 ```
 
-### 2. Instalación del entorno
+### 2. Crear y activar el entorno virtual
 
 ```bash
-pip install crewai crewai-tools langchain-community pandas tabulate streamlit
+python -m venv .venv
+
+# Activar en Windows
+.\.venv\Scripts\activate
+
+# Activar en Linux/macOS
+source .venv/bin/activate
 ```
 
-### 3. Verificar la conexión con el LLM local
+### 3. Instalación del entorno
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Verificar la conexión con el LLM local
 
 ```bash
 python test_conexion.py
 ```
 
-### 4. Generar la base de datos de prueba
+### 5. Generar la base de datos de prueba
 
 ```bash
 python crear_bd.py
 ```
 
-### 5. Ejecutar los agentes
+### 6. Ejecutar los agentes
 
 ```bash
 # Agente con herramientas personalizadas
@@ -103,7 +124,7 @@ python agente_csv_hibrido.py
 python agente_sql.py
 ```
 
-### 6. Ejecutar la Interfaz Web (Streamlit)
+### 7. Ejecutar la Interfaz Web (Streamlit)
 
 ```bash
 streamlit run app.py
